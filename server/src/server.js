@@ -8,7 +8,8 @@ const { loadPlanetsData } = require('./models/planets.model');
 const PORT = process.env.PORT || 8000;
 
 // Update below to match your own MongoDB connection string.
-const MONGO_URL = 'mongodb+srv://nasa-api:qX4ciaDgNwIROfPp@nasacluster.dtciu.mongodb.net/nasa?retryWrites=true&w=majority';
+const MONGO_URL =
+  'mongodb+srv://nasa-api:g0si7TKACXDVexrf@nasacluster.bkwqx0z.mongodb.net/?retryWrites=true&w=majority'
 
 const server = http.createServer(app);
 
@@ -21,12 +22,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 async function startServer() {
-  await mongoose.connect(MONGO_URL, {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(MONGO_URL);
   await loadPlanetsData();
   
   server.listen(PORT, () => {
