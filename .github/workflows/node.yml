@@ -1,9 +1,9 @@
 name: NASA Project CI
 on: 
   push:
-    branches: [ master ]
+    branches: [ mac-review1 ]
   pull_request:
-    branches: [ master ]
+    branches: [ mac-review1 ]
 jobs: 
   build:
     runs-on: macos-latest
