@@ -15,10 +15,11 @@ jobs:
         node-version: [14.x, 16.x]
         mongodb-version: ['6.0']
     runs-on: ubuntu-latest
+    timeout-minutes: 10 # Timeout after 10 minutes
     steps: 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js version ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Use MongoEB from GitHub actions/checkout
