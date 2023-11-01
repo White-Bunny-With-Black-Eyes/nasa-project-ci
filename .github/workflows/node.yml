@@ -9,7 +9,7 @@ jobs:
   build:
     env: 
       CI: true
-      MONGO_URL: mongodb://localhost:27017/NASACluster
+      MONGO_URL: mongodb://localhost/Project0
     strategy:
       matrix: 
         node-version: [14.x, 16.x]
@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Use MongoEB from GitHub actions/checkout
-        uses: supercharge/mongodb-github-action@1.6.0
+        uses: supercharge/mongodb-github-action@1.10.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
       - run: npm install
