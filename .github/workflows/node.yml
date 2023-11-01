@@ -9,7 +9,7 @@ jobs:
   build:
     env: 
       CI: true
-      MONGO_URL: mongodb://localhost/NASACluster
+      MONGO_URL: ${{ secrets.MONGO_URL }}
     strategy:
       matrix: 
         node-version: [14.x, 16.x]
@@ -25,32 +25,6 @@ jobs:
         uses: supercharge/mongodb-github-action@1.10.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-      
-      - name: Install MongoDB Shell
-        run: |
-          wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-          echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
-          sudo apt-get update
-          sudo apt-get install -y mongodb-org-shell
-          
-      
-      # Test MongoDB Connection
-      - name: Test MongoDB Connection
-        run: |
-          mongo --eval "printjson(db.serverStatus())"
-
-      - name: Check MongoDB Logs
-        run: sudo cat /var/log/mongodb/mongod.log
-
-      # List MongoDB Databases
-      - name: List MongoDB Databases
-        run: mongo --eval "printjson(db.adminCommand('listDatabases'))"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build --prefix client
-
-      - name: Run tests
-        run: npm test
+      - run: npm install
+      - run: npm run build --prefix client
+      - run: npm test
