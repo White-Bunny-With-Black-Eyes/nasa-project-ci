@@ -36,7 +36,11 @@ jobs:
       
       # Test MongoDB Connection
       - name: Test MongoDB Connection
-        run: mongo --eval "db.stats()" --quiet
+        run: |
+          mongo --eval "printjson(db.serverStatus())"
+
+      - name: Check MongoDB Logs
+        run: sudo cat /var/log/mongodb/mongod.log
 
       # List MongoDB Databases
       - name: List MongoDB Databases
