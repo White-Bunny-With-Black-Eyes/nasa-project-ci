@@ -9,7 +9,7 @@ jobs:
   build:
     env: 
       CI: true
-      MONGO_URL: mongodb://localhost/Project0
+      MONGO_URL: mongodb://localhost/NASACluster
     strategy:
       matrix: 
         node-version: [14.x, 16.x]
